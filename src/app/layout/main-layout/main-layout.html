@@ -1,0 +1,15 @@
+<mat-toolbar class="topbar">
+  <button mat-icon-button><mat-icon>menu</mat-icon></button>
+  <a routerLink="/home" class="brand">Pure LIS</a>
+  <span class="user">- {{ userName }}</span>
+
+  <span class="spacer"></span>
+
+  <button mat-icon-button><mat-icon>lock_open</mat-icon></button>
+  <button mat-icon-button><mat-icon>crop_square</mat-icon></button>
+  <button mat-icon-button><mat-icon>logout</mat-icon></button>
+</mat-toolbar>
+
+<main class="content">
+  <router-outlet />
+</main>

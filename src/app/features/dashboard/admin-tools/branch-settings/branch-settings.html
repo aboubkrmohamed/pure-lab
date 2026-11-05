@@ -1,0 +1,74 @@
+@if (currentBranch; as branch) {
+  <div class="container-fluid py-3">
+
+    <h2 class="h5 fw-bold text-center pb-2 border-bottom">{{ branch.name }}</h2>
+
+    <form [formGroup]="form" class="mt-3">
+
+      <mat-form-field class="w-100">
+        <mat-label>Select Receipt Style</mat-label>
+        <mat-select formControlName="receiptStyle">
+          @for (s of receiptStyles; track s.value) {
+            <mat-option [value]="s.value">{{ s.label }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Footer 1 (العنوان)</mat-label>
+        <input matInput formControlName="footer1" />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Footer 2 (أرقام الموبايل)</mat-label>
+        <input matInput formControlName="footer2" />
+      </mat-form-field>
+
+      <mat-form-field class="w-100">
+        <mat-label>Footer 3 (مواعيد العمل)</mat-label>
+        <input matInput formControlName="footer3" />
+      </mat-form-field>
+
+      <div class="row g-3 align-items-start">
+        <div class="col-12 col-md-4 col-lg-3">
+          <div class="header-preview">
+            @if (headerImage) {
+              <img [src]="headerImage" alt="Receipt header" />
+            }
+          </div>
+        </div>
+
+        <div class="col-12 col-md-8 col-lg-4 d-flex flex-column gap-2">
+          <mat-checkbox formControlName="printDailySerial">
+            Print Daily Serial in Receipt
+          </mat-checkbox>
+
+          <input #fileInput type="file" accept="image/*" hidden
+                 (change)="onHeaderSelected($event)" />
+
+          <button mat-stroked-button type="button" (click)="fileInput.click()">
+            <i class="fa-solid fa-cloud-arrow-up"></i> THERMAL RECEIPT HEADER
+          </button>
+
+          <button mat-stroked-button type="button" color="warn"
+                  [disabled]="!headerImage" (click)="removeHeader()">
+            <i class="fa-solid fa-trash"></i> REMOVE HEADER
+          </button>
+
+          <button mat-flat-button type="button"
+                  [disabled]="saving()" (click)="save()">
+            <i class="fa-solid fa-floppy-disk"></i> SAVE SETTINGS
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <mat-paginator
+      class="mt-4"
+      [length]="branches().length"
+      [pageSize]="1"
+      [pageIndex]="pageIndex()"
+      [hidePageSize]="true"
+      (page)="onPageChange($event)" />
+  </div>
+}

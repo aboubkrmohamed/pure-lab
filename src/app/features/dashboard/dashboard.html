@@ -1,0 +1,25 @@
+<section class="text-center pt-3">
+  <div class="logo mx-auto mb-3">
+    <i class="fa-solid fa-flask"></i>
+  </div>
+
+  <h1 class="h4 fw-bold mb-3">Pure LIS - Dashboards</h1>
+  <h2 class="h5 fw-bold mb-4">{{ labName }}</h2>
+
+  <nav class="d-flex flex-wrap justify-content-center gap-2 mb-4">
+    @for (t of tabs; track t.route) {
+      @if (t.disabled) {
+        <span class="tab-btn tab-disabled">
+          <i class="fa-solid {{ t.icon }}"></i> {{ t.label }}
+        </span>
+      } @else {
+        <a class="tab-btn {{ t.color }}"
+           [routerLink]="t.route"
+           routerLinkActive="active">
+          <i class="fa-solid {{ t.icon }}"></i> {{ t.label }}
+        </a>
+      }
+    }
+  </nav>
+</section>
+

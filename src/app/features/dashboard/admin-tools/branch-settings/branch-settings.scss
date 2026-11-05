@@ -1,0 +1,12 @@
+.header-preview {
+  height: 190px;
+  border: 1px solid #ccc;
+  background: #fafafa;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+
+  img { max-width: 100%; max-height: 100%; object-fit: contain; }
+}
+
+button i { margin-inline-end: 8px; }

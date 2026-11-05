@@ -1,0 +1,58 @@
+<!-- <section class="lab-header">
+  <div class="lab-logo"><i class="fa-solid fa-flask"></i></div>
+  <div class="lab-info">
+    <h2>{{ labName }}</h2>
+    <p class="branch">{{ branch }}</p>
+    <p class="user">{{ userName }}</p>
+  </div>
+</section>
+
+<section class="grid">
+  @for (m of modules; track m.route) {
+    <a class="card" [routerLink]="['/', m.route]" [style.background]="m.color">
+      <div class="icon" [style.background]="m.iconColor">
+        <mat-icon>{{ m.icon }}</mat-icon>
+      </div>
+      <div class="text">
+        <h3>{{ m.title }}</h3>
+        <p>{{ m.description }}</p>
+      </div>
+      <mat-icon class="arrow">arrow_back</mat-icon>
+    </a>
+  }
+</section> -->
+
+
+<section class="lab-header d-flex align-items-center gap-3 p-3 px-4 rounded mb-3">
+  <div class="lab-logo d-grid">
+    <i class="fa-solid fa-flask"></i>
+  </div>
+  <div>
+    <h2 class="h5 fw-bold mb-1">{{ labName }}</h2>
+    <p class="branch mb-0">{{ branch }}</p>
+    <p class="user mb-0">{{ userName }}</p>
+  </div>
+</section>
+
+<section class="row g-2">
+  @for (m of modules; track m.route) {
+    <div class="col-12 col-md-6 col-lg-4">
+      <a class="module-card d-flex align-items-center gap-3 p-3 rounded h-100 text-decoration-none"
+         [routerLink]="['/', m.route]"
+         [style.background]="m.color">
+
+        <div class="icon d-flex align-items-center justify-content-center rounded-circle flex-shrink-0"
+             [style.background]="m.iconColor">
+          <mat-icon>{{ m.icon }}</mat-icon>
+        </div>
+
+        <div class="flex-grow-1">
+          <h3 class="h6 fw-bold mb-1">{{ m.title }}</h3>
+          <p class="mb-0 small">{{ m.description }}</p>
+        </div>
+
+        <mat-icon class="arrow">arrow_back</mat-icon>
+      </a>
+    </div>
+  }
+</section>
