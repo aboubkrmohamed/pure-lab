@@ -1,0 +1,59 @@
+<div class="shadow-sm rounded bg-white">
+
+  <!-- الهيدر -->
+  <div class="d-flex align-items-center justify-content-between p-3 border-bottom">
+    <div>
+      <div class="fw-bold text-primary fs-5">
+        <i class="fa-regular fa-clock"></i> Today's Subtotal
+      </div>
+      <div class="small">{{ data()?.todaySubtotal | number: '1.2-2' }}</div>
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+      <button mat-button [matMenuTriggerFor]="branchMenu" class="branch-btn">
+        <i class="fa-solid fa-earth-africa"></i> {{ currentBranchName }}
+      </button>
+      <mat-menu #branchMenu="matMenu">
+        @for (b of branches; track b.id) {
+          <button mat-menu-item (click)="branchId.set(b.id)">{{ b.name }}</button>
+        }
+      </mat-menu>
+
+      <button mat-icon-button matTooltip="Download Database Backup" (click)="backup()">
+        <i class="fa-solid fa-cloud-arrow-down"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- بيانات اليوزر -->
+  @if (currentUser; as u) {
+    <div class="p-3">
+      <h3 class="h6 fw-bold mb-0">{{ u.userName }}</h3>
+      <small class="text-muted">Last closure: {{ u.lastClosure ?? '—' }}</small>
+
+      <div class="mt-2 d-flex flex-column gap-2">
+        <div class="stat-row"><span><i class="fa-solid fa-tags"></i> {{ u.payments }}</span><b>Payments</b></div>
+        <div class="stat-row"><span><i class="fa-solid fa-tags"></i> {{ u.discount }}</span><b>Discount</b></div>
+        <div class="stat-row"><span><i class="fa-solid fa-tags"></i> {{ u.expenses }}</span><b>Expenses</b></div>
+        <div class="stat-row"><span class="text-primary fw-bold"><i class="fa-solid fa-tags"></i> {{ u.subtotal }}</span><b>Subtotal</b></div>
+      </div>
+
+      <div class="d-flex mt-3">
+        <button class="btn btn-outline-success w-50 rounded-0">Details</button>
+        <button class="btn btn-outline-danger w-50 rounded-0">Close</button>
+      </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-between border-top px-3 py-1">
+      <button mat-icon-button (click)="prev()" [disabled]="userIndex() === 0">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      <span class="small">{{ userIndex() + 1 }} of {{ data()?.users?.length }} Users</span>
+      <button mat-icon-button (click)="next()" [disabled]="userIndex() >= (data()?.users?.length ?? 1) - 1">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+    </div>
+  } @else {
+    <div class="p-4 text-center text-muted">لا يوجد مستخدمون</div>
+  }
+</div>

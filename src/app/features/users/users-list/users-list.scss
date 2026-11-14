@@ -1,0 +1,28 @@
+.add-btn {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 50%;
+  background: #2196f3;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+}
+
+.user-list { border: 1px solid #e0e0e0; border-radius: 4px; overflow: hidden; }
+
+.user-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+
+  &:hover { background: #f5f9fb; }
+  &.active { background: #b2dde6; }
+  &.inactive .name { opacity: .5; text-decoration: line-through; }
+
+  .play { color: #1faa87; font-size: 13px; }
+  .uid { width: 60px; border-inline-start: 1px solid #e0e0e0; padding-inline-start: 12px; }
+}

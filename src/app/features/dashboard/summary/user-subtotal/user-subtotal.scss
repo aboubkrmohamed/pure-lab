@@ -1,0 +1,12 @@
+.branch-btn { background: #eceff1; border-radius: 4px; font-weight: 700; }
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 12px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  i { color: #78909c; margin-inline-end: 8px; }
+}

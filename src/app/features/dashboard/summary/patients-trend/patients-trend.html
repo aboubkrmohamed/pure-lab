@@ -1,0 +1,16 @@
+<div class="shadow-sm rounded bg-white p-3">
+  <div class="d-flex align-items-center gap-3">
+    <i class="fa-solid fa-heart-pulse pulse"></i>
+    <div>
+      <small class="text-muted">LAST 24 HR TREND</small>
+      <div class="d-flex align-items-baseline gap-1">
+        <span class="count">{{ trend()?.total ?? 0 }}</span>
+        <span class="fw-bold fs-5">Patient</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="chart-wrap mt-3">
+    <canvas baseChart [data]="chartData" [options]="chartOptions" type="line"></canvas>
+  </div>
+</div>

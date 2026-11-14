@@ -1,0 +1,29 @@
+<mat-tab-group animationDuration="0ms">
+
+  <mat-tab label="DAILY SUMMARY">
+    @if (data(); as d) {
+      <div class="d-flex flex-column gap-2 pt-2">
+        <div class="bar blue"><i class="fa-solid fa-arrow-down-wide-short"></i><span>Patient visits</span><b>{{ d.daily.patientVisits }}</b></div>
+        <div class="bar green"><i class="fa-solid fa-earth-africa"></i><span>Subtotal income</span><b>{{ d.daily.subtotalIncome }}</b></div>
+        <div class="bar orange"><i class="fa-solid fa-scissors"></i><span>Expenses</span><b>{{ d.daily.expenses }}</b></div>
+        <div class="bar teal"><i class="fa-solid fa-percent"></i><span>Discount</span><b>{{ d.daily.discount }}</b></div>
+      </div>
+    }
+  </mat-tab>
+
+  <mat-tab label="TESTS">
+    @if (data(); as d) {
+      <div class="d-flex flex-column gap-2 pt-2">
+        <div class="bar blue"><i class="fa-solid fa-arrow-down-wide-short"></i><span>Requested tests</span><b>{{ d.tests.requested }}</b></div>
+        <div class="bar green"><i class="fa-solid fa-print"></i><span>Printed</span><b>{{ d.tests.printed }}</b></div>
+        <div class="bar orange"><i class="fa-solid fa-clock"></i><span>Delayed</span><b>{{ d.tests.delayed }}</b></div>
+        <div class="bar teal"><i class="fa-solid fa-trash"></i><span>Deleted</span><b>{{ d.tests.deleted }}</b></div>
+      </div>
+    }
+  </mat-tab>
+
+  <mat-tab label="SAMPLES">
+    <p class="p-3 text-muted">sample workflow goes here</p>
+  </mat-tab>
+
+</mat-tab-group>

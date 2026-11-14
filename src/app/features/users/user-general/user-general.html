@@ -1,0 +1,55 @@
+<div class="p-3">
+  <div class="row g-3">
+
+    <div class="col-12 col-md-7">
+      <div class="input-group">
+        <span class="input-group-text">Full Name</span>
+        <input class="form-control" [ngModel]="user().fullName"
+               (ngModelChange)="patch({ fullName: $event })" placeholder="الاسم بالكامل" />
+      </div>
+    </div>
+
+    <div class="col-12 col-md-5">
+      <div class="input-group">
+        <span class="input-group-text">Username</span>
+        <input class="form-control" [ngModel]="user().username"
+               (ngModelChange)="patch({ username: $event })" dir="ltr" />
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="input-group">
+        <span class="input-group-text">Email</span>
+        <input class="form-control" type="email" [ngModel]="user().email"
+               (ngModelChange)="patch({ email: $event })" dir="ltr" />
+      </div>
+    </div>
+
+    <div class="col-12 col-md-7">
+      <select class="form-select" [ngModel]="user().branchId"
+              (ngModelChange)="patch({ branchId: $event })">
+        @for (b of branches; track b.id) {
+          <option [ngValue]="b.id">{{ b.name }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="col-12 col-md-5">
+      <div class="input-group">
+        <span class="input-group-text">Discount %</span>
+        <input class="form-control" type="number" min="0" max="100"
+               [ngModel]="user().discountPercent" (ngModelChange)="setDiscount($event)" />
+      </div>
+    </div>
+
+    <div class="col-12">
+      <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="isAdmin"
+               [checked]="user().isAdmin"
+               (change)="patch({ isAdmin: $any($event.target).checked })" />
+        <label class="form-check-label fw-bold" for="isAdmin">Admin (مدير النظام)</label>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<div class="p-3">
+  @for (r of roles; track r.key) {
+    <div class="form-check form-switch py-2 border-bottom">
+      <input class="form-check-input" type="checkbox" role="switch" [id]="r.key"
+             [checked]="has(r.key)"
+             (change)="toggle(r.key, $any($event.target).checked)" />
+      <label class="form-check-label fw-bold" [for]="r.key">{{ r.label }}</label>
+      <div class="small text-muted">{{ r.description }}</div>
+    </div>
+  }
+</div>

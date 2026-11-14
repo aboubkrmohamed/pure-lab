@@ -1,0 +1,18 @@
+.round-btn {
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+  transition: filter .15s;
+
+  &:hover:not(:disabled) { filter: brightness(1.1); }
+  &:disabled { opacity: .45; cursor: not-allowed; }
+}
+.blue { background: #2196f3; }
+.green { background: #1faa87; }
+.red { background: #e53935; }
+
+.empty { padding: 80px 16px; }

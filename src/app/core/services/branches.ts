@@ -1,4 +1,4 @@
-import { Branch } from './../../features/dashboard/admin-tools/module-card.model';
+import { Branch } from './models/module-card.model';
 import { Injectable } from '@angular/core';
 import { Observable, of, delay } from 'rxjs';
 @Injectable({

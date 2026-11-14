@@ -1,4 +1,4 @@
-import { Branch } from './../module-card.model';
+import { Branch } from '../../../../core/services/models/module-card.model';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';

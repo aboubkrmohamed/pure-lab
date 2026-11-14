@@ -1,1 +1,24 @@
-<div class="p-4">General Settings (قريبًا)</div>
+<div class="container-fluid py-3">
+  <form [formGroup]="form">
+
+    <mat-form-field class="w-100">
+      <mat-label>Abnormal flag style</mat-label>
+      <mat-select formControlName="abnormalFlagStyle">
+        @for (f of flagStyles; track f.value) {
+          <mat-option [value]="f.value">{{ f.label }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+
+    <div class="mb-3">
+      <mat-checkbox formControlName="samplingListPagePerSample">
+        Sampling list page per sample
+      </mat-checkbox>
+    </div>
+
+    <button type="button" class="save-btn" [disabled]="saving()" (click)="save()">
+      SAVE CHANGES
+    </button>
+
+  </form>
+</div>

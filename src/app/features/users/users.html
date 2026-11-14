@@ -1,0 +1,53 @@
+<div class="container-fluid py-3">
+  <div class="row g-3">
+
+    <div class="col-12 col-lg-5 col-xl-4">
+      <app-users-list
+        [selectedId]="draft()?.id ?? null"
+        [draftName]="draft()?.id === 0 ? (draft()?.fullName || 'new user name') : null"
+        (selected)="select($event)"
+        (add)="addNew()" />
+    </div>
+
+    <div class="col-12 col-lg-7 col-xl-8">
+      @if (draft(); as d) {
+
+        <div class="d-flex align-items-center gap-2 mb-3">
+          <button class="round-btn blue" title="حفظ" (click)="save()">
+            <i class="fa-solid fa-floppy-disk"></i>
+          </button>
+          <button class="round-btn green" [disabled]="d.id === 0"
+                  [title]="d.isActive ? 'إيقاف المستخدم' : 'تفعيل المستخدم'"
+                  (click)="toggleActive()">
+            <i class="fa-solid" [class.fa-pause]="d.isActive" [class.fa-play]="!d.isActive"></i>
+          </button>
+          <button class="round-btn red" title="تحديث" (click)="refresh()">
+            <i class="fa-solid fa-rotate-right"></i>
+          </button>
+          @if (!d.isActive) {
+            <span class="badge text-bg-secondary">موقوف</span>
+          }
+        </div>
+
+        <mat-tab-group animationDuration="0ms">
+          <mat-tab label="GENERAL">
+            <app-user-general [user]="d" (userChange)="draft.set($event)" />
+          </mat-tab>
+          <mat-tab label="PRIVILEGES">
+            <app-user-privileges [user]="d" (userChange)="draft.set($event)" />
+          </mat-tab>
+          <mat-tab label="ROLES">
+            <app-user-roles [user]="d" (userChange)="draft.set($event)" />
+          </mat-tab>
+        </mat-tab-group>
+
+      } @else {
+        <div class="empty text-center text-muted">
+          <i class="fa-solid fa-users fs-1 mb-3"></i>
+          <p>اختار مستخدم من القائمة أو اضغط + لإضافة مستخدم جديد</p>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>

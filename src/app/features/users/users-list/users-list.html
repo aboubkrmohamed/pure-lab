@@ -1,0 +1,53 @@
+<div class="bg-white rounded shadow-sm p-2">
+
+  <div class="d-flex align-items-center gap-2 mb-2">
+    <div class="input-group">
+      <span class="input-group-text bg-white"><i class="fa-solid fa-magnifying-glass"></i></span>
+      <input class="form-control" placeholder="Search Users..."
+             [value]="search()" (input)="onSearch($any($event.target).value)" />
+    </div>
+    <button class="add-btn" title="مستخدم جديد" (click)="add.emit()">
+      <i class="fa-solid fa-plus"></i>
+    </button>
+  </div>
+
+  <ul class="list-unstyled m-0 user-list">
+    @if (draftName() !== null) {
+      <li class="user-row active">
+        <span class="form-check form-switch m-0">
+          <input class="form-check-input" type="checkbox" role="switch" checked disabled />
+        </span>
+        <i class="fa-solid fa-play play"></i>
+        <span class="name flex-grow-1">{{ draftName() }}</span>
+        <span class="uid">0</span>
+      </li>
+    }
+
+    @for (u of rows(); track u.id) {
+      <li class="user-row"
+          [class.active]="u.id === selectedId()"
+          [class.inactive]="!u.isActive"
+          (click)="selected.emit(u)">
+        <span class="form-check form-switch m-0">
+          <input class="form-check-input" type="checkbox" role="switch"
+                 [checked]="u.id === selectedId()" disabled />
+        </span>
+        <i class="fa-solid fa-play play"></i>
+        <span class="name flex-grow-1">{{ u.fullName }}</span>
+        <span class="uid">{{ u.id }}</span>
+      </li>
+    } @empty {
+      <li class="p-4 text-center text-muted">لا توجد نتائج</li>
+    }
+  </ul>
+
+  <div class="d-flex align-items-center justify-content-between border rounded mt-2 px-2 py-1">
+    <button class="btn btn-sm" (click)="prev()" [disabled]="page() === 0">
+      <i class="fa-solid fa-chevron-right"></i>
+    </button>
+    <span class="small">{{ page() + 1 }} / {{ pages() }} Pages</span>
+    <button class="btn btn-sm" (click)="next()" [disabled]="page() >= pages() - 1">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+  </div>
+</div>

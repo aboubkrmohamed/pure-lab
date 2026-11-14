@@ -1,0 +1,57 @@
+<div class="p-3">
+
+  <div class="d-flex gap-2 mb-3">
+    <button class="btn btn-success" (click)="checkAll()">
+      <i class="fa-solid fa-list-check"></i> Check all
+    </button>
+    <button class="btn btn-danger" (click)="uncheckAll()">
+      <i class="fa-solid fa-list-check"></i> Uncheck all
+    </button>
+  </div>
+
+  <div class="row g-2 mb-3">
+    <div class="col-12 col-md-6">
+      <select class="form-select" [value]="branchId()"
+              (change)="branchId.set(+$any($event.target).value)">
+        @for (b of branches; track b.id) {
+          <option [value]="b.id">{{ b.name }}</option>
+        }
+      </select>
+    </div>
+    <div class="col-12 col-md-6">
+      <select class="form-select" [value]="group()"
+              (change)="group.set($any($event.target).value)">
+        @for (g of groups; track g.value) {
+          <option [value]="g.value">{{ g.label }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  @if (visible().length === 0) {
+    <p class="text-muted text-center py-4">لا توجد صلاحيات في المجموعة دي لسه</p>
+  }
+
+  <div class="row g-0">
+    <div class="col-12 col-md-6">
+      @for (p of left(); track p.key) {
+        <div class="form-check form-switch py-1">
+          <input class="form-check-input" type="checkbox" role="switch" [id]="p.key"
+                 [checked]="isChecked(p.key)"
+                 (change)="setKey(p.key, $any($event.target).checked)" />
+          <label class="form-check-label" [for]="p.key">{{ p.label }}</label>
+        </div>
+      }
+    </div>
+    <div class="col-12 col-md-6">
+      @for (p of right(); track p.key) {
+        <div class="form-check form-switch py-1">
+          <input class="form-check-input" type="checkbox" role="switch" [id]="p.key"
+                 [checked]="isChecked(p.key)"
+                 (change)="setKey(p.key, $any($event.target).checked)" />
+          <label class="form-check-label" [for]="p.key">{{ p.label }}</label>
+        </div>
+      }
+    </div>
+  </div>
+</div>

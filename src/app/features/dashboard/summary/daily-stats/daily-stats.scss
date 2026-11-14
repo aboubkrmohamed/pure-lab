@@ -1,0 +1,18 @@
+.bar {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  font-weight: 700;
+  border-radius: 3px;
+  overflow: hidden;
+  min-height: 38px;
+
+  i { width: 48px; text-align: center; }
+  span { flex: 1; padding: 0 12px; }
+  b { width: 120px; padding: 0 12px; background: rgba(255, 255, 255, .18); align-self: stretch; display: flex; align-items: center; }
+}
+
+.blue   { background: #2a85c8; }
+.green  { background: #2fd14f; }
+.orange { background: #e8671f; }
+.teal   { background: #14c9a6; }

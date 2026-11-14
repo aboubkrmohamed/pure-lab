@@ -1,0 +1,21 @@
+<div class="shadow-sm rounded bg-white overflow-hidden">
+  <div class="header d-flex align-items-center justify-content-center">
+    <h3 class="h6 fw-bold m-0">Active Users Page 1 of 1</h3>
+  </div>
+
+  @for (u of users(); track u.id) {
+    <div class="user-row d-flex align-items-center gap-3 p-3 border-bottom">
+      <i class="fa-solid fa-id-badge avatar"></i>
+      <div class="flex-grow-1">
+        <div>{{ u.fullName }}</div>
+        <small class="text-muted">{{ u.username }}</small>
+      </div>
+      <div class="flex-grow-1 text-center">{{ u.branchName }}</div>
+      <button class="btn btn-link text-warning fs-5" (click)="logout(u)" title="تسجيل خروج">
+        <i class="fa-solid fa-right-from-bracket"></i>
+      </button>
+    </div>
+  } @empty {
+    <div class="p-4 text-center text-muted">لا يوجد مستخدمون نشطون</div>
+  }
+</div>

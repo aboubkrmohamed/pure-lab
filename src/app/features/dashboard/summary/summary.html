@@ -1,6 +1,12 @@
-  <div class="p-4">
-      <a routerLink="/dashboard" class="btn btn-outline-secondary btn-sm mb-3">
-        <i class="fa-solid fa-arrow-right"></i> رجوع
-      </a>
-      <h3>Summary</h3>
+<div class="container-fluid py-3">
+  <div class="row g-3">
+    <div class="col-12 col-lg-6">
+      <app-user-subtotal [(branchId)]="branchId" />
+      <app-daily-stats class="d-block mt-3" [branchId]="branchId()" />
     </div>
+    <div class="col-12 col-lg-6">
+      <app-active-users />
+      <app-patients-trend class="d-block mt-3" />
+    </div>
+  </div>
+</div>
