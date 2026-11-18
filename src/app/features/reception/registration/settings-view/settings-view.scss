@@ -1,0 +1,18 @@
+.settings { max-width: 1400px; margin: auto; }
+.lbl { font-weight: 700; font-size: 14px; margin-bottom: 6px; display: block; }
+.form-control, .form-select { background: #fff; min-height: 46px; }
+
+.tg {
+  background: #fff; box-shadow: 0 1px 4px rgba(0, 0, 0, .2); border-radius: 3px;
+  padding: 18px 16px 18px 3.2rem; display: flex; align-items: center;
+  .form-check-input { cursor: pointer; margin-left: -2.4rem; width: 2.6em; height: 1.4em; }
+  .form-check-label { cursor: pointer; margin-left: .5rem; }
+}
+
+.up, .act {
+  background: #fff; border: 0; border-radius: 3px; padding: 10px 18px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .25); font-weight: 600; letter-spacing: .5px; font-size: 13px;
+  &:hover { background: #f3f3f3; }
+  i { margin-inline-end: 8px; }
+}
+.up { padding: 8px 20px; i { margin: 0; } }

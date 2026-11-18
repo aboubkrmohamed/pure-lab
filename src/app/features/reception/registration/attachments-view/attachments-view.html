@@ -1,0 +1,26 @@
+<app-reg-header title="المرفقات">
+  <input #fileEl type="file" hidden multiple accept="image/*,application/pdf" (change)="onFiles($event)" />
+  <button class="rbtn indigo" title="إضافة مرفق" (click)="fileEl.click()"><i class="fa-solid fa-camera"></i></button>
+</app-reg-header>
+
+<div class="row g-2 p-3">
+  @for (a of store.attachments(); track a.id) {
+    <div class="col-6 col-md-3">
+      <div class="card h-100">
+        @if (isImage(a.dataUrl)) {
+          <img [src]="a.dataUrl" class="card-img-top" style="height: 140px; object-fit: cover" [alt]="a.name" />
+        } @else {
+          <div class="text-center p-4 fs-1 text-danger"><i class="fa-solid fa-file-pdf"></i></div>
+        }
+        <div class="card-body p-2 small">
+          <div class="text-truncate">{{ a.name }}</div>
+          <div class="text-muted">{{ kb(a.size) }} KB</div>
+          <a class="btn btn-sm btn-outline-primary me-1" [href]="a.dataUrl" [download]="a.name"><i class="fa-solid fa-download"></i></a>
+          <button class="btn btn-sm btn-outline-danger" (click)="store.removeAttachment(a.id)"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  } @empty {
+    <p class="text-center text-muted p-5">مفيش مرفقات، دوس على الكاميرا للإضافة</p>
+  }
+</div>

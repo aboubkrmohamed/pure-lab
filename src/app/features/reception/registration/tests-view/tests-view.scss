@@ -1,0 +1,19 @@
+.box { background: #fff; border-radius: 3px; box-shadow: 0 1px 3px rgba(0, 0, 0, .15); display: flex; flex-direction: column; min-height: 80vh; }
+.who { background: #e8e8e8; }
+.req { padding: 10px 12px; border-bottom: 1px solid #eee; }
+
+.list { box-shadow: 0 2px 4px rgba(0, 0, 0, .12); }
+.trow {
+  display: flex; align-items: center; width: 100%; padding: 0;
+  border: 0; border-bottom: 1px solid #eee; background: #fff; text-align: start;
+  .code { width: 70px; align-self: stretch; display: flex; align-items: center; justify-content: center; background: #eee; font-size: 12px; }
+  .name { flex: 1; padding: 12px; font-weight: 700; font-size: 14px; }
+  .price { padding: 0 12px; color: #3949ab; font-weight: 700; }
+  &:hover { background: #f3f8fd; }
+  &.focus { background: #dcebfa; }
+  &.added { background: #e3f5e8; }
+}
+
+.tabbtn { background: none; border: 0; border-bottom: 2px solid transparent; padding: 8px 4px; font-size: 13px; font-weight: 600; color: #777;
+  &.on { color: #1976d2; border-color: #1976d2; } }
+.pg { background: #a9b3ee; }

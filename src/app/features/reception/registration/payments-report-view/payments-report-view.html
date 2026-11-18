@@ -1,0 +1,33 @@
+<app-reg-header title="تقرير المدفوعات">
+  <button class="rbtn indigo no-print" title="طباعة" (click)="print()"><i class="fa-solid fa-print"></i></button>
+</app-reg-header>
+
+<div class="p-3" style="max-width: 900px; margin: auto">
+  <p>
+    <b>رقم الزيارة:</b> {{ store.visit().visitNo || '-' }}
+    &nbsp; <b>المريض:</b> {{ store.patientForm.controls.fullName.value || '-' }}
+  </p>
+  <table class="table table-bordered text-center">
+    <thead class="table-light">
+      <tr><th>النوع</th><th>التاريخ</th><th>المبلغ</th><th>المستخدم</th></tr>
+    </thead>
+    <tbody>
+      @for (p of store.payments(); track p.id) {
+        <tr>
+          <td>{{ p.kind === 'payment' ? 'دفع' : 'خصم' }}@if (p.method === 'card') { (فيزا) }</td>
+          <td>{{ p.date | date: 'dd MMM yy hh:mm a' }}</td>
+          <td>{{ p.amount | number: '1.2-2' }}</td>
+          <td>{{ p.user }}</td>
+        </tr>
+      } @empty {
+        <tr><td colspan="4" class="text-muted">مفيش مدفوعات</td></tr>
+      }
+    </tbody>
+    <tfoot>
+      <tr><th colspan="2">الإجمالي</th><th colspan="2">{{ store.total() | number: '1.2-2' }}</th></tr>
+      <tr><th colspan="2">الخصم</th><th colspan="2">{{ store.discount() | number: '1.2-2' }}</th></tr>
+      <tr><th colspan="2">المدفوع</th><th colspan="2">{{ store.paid() | number: '1.2-2' }}</th></tr>
+      <tr><th colspan="2">المتبقي</th><th colspan="2">{{ store.remaining() | number: '1.2-2' }}</th></tr>
+    </tfoot>
+  </table>
+</div>

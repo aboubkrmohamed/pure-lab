@@ -1,0 +1,7 @@
+.sample { background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, .2); overflow: hidden; }
+.t { display: flex; align-items: center; gap: 12px; padding: 12px; border-bottom: 1px solid #eee; i { color: #5c6bc0; } }
+.chip { border: 0; color: #fff; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 600;
+  &.indigo { background: #3949ab; } &.red { background: #c62828; } &.green { background: #1b9e7a; }
+  &.peach { background: #f1b8a4; } &:disabled { opacity: .7; } }
+.status { background: #303f9f; color: #fff; padding: 16px; font-size: 18px; font-weight: 600; }
+.loc { background: #0d8a6a; color: #fff; padding: 16px; font-size: 18px; font-weight: 600; }

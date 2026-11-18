@@ -1,0 +1,16 @@
+  <div class="d-flex align-items-center justify-content-center gap-1">
+      <button class="btn btn-sm btn-light" (click)="go(page() - 1)" [disabled]="page() === 0">
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+      @for (p of items(); track $index) {
+        @if (p === -1) {
+          <span class="px-1">…</span>
+        } @else {
+          <button class="btn btn-sm" [class.btn-primary]="p === page()" [class.btn-light]="p !== page()"
+                  (click)="go(p)">{{ p + 1 }}</button>
+        }
+      }
+      <button class="btn btn-sm btn-light" (click)="go(page() + 1)" [disabled]="page() >= pages() - 1">
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+    </div>

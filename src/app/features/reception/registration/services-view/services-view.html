@@ -1,0 +1,31 @@
+<app-reg-header title="الخدمات" />
+
+<div class="row g-2 p-2">
+  <div class="col-12 col-lg-6">
+    <div class="bg-white shadow-sm">
+      <div class="p-2 fw-bold border-bottom">الخدمات المتاحة</div>
+      @for (s of catalog(); track s.id) {
+        <button class="btn w-100 d-flex justify-content-between border-bottom rounded-0 p-3" (click)="add(s)">
+          <span>{{ s.name }}</span><b class="text-primary">{{ s.price | number: '1.2-2' }}</b>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-6">
+    <div class="bg-white shadow-sm">
+      <div class="p-2 fw-bold border-bottom">الخدمات المضافة</div>
+      @for (s of store.services(); track s.id) {
+        <div class="d-flex justify-content-between align-items-center border-bottom p-3">
+          <span>{{ s.name }}</span>
+          <span><b>{{ s.price | number: '1.2-2' }}</b>
+            <button class="btn btn-sm text-danger" [disabled]="store.locked()" (click)="store.removeService(s.id)">
+              <i class="fa-solid fa-xmark"></i></button></span>
+        </div>
+      } @empty {
+        <p class="text-center text-muted p-4">مفيش خدمات مضافة</p>
+      }
+    </div>
+    <div class="mt-2"><app-totals-bar /></div>
+  </div>
+</div>

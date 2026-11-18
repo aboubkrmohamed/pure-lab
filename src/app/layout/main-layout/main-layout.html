@@ -1,13 +1,19 @@
-<mat-toolbar class="topbar">
+<mat-toolbar class="topbar" dir="ltr">
   <button mat-icon-button><mat-icon>menu</mat-icon></button>
   <a routerLink="/home" class="brand">Pure LIS</a>
   <span class="user">- {{ userName }}</span>
 
   <span class="spacer"></span>
 
-  <button mat-icon-button><mat-icon>lock_open</mat-icon></button>
-  <button mat-icon-button><mat-icon>crop_square</mat-icon></button>
-  <button mat-icon-button><mat-icon>logout</mat-icon></button>
+  @for (a of toolbar.actions(); track a.icon) {
+    <button mat-icon-button [matTooltip]="a.tooltip" (click)="a.run()">
+      <i [class]="'fa-solid ' + a.icon"></i>
+    </button>
+  }
+
+  <button mat-icon-button matTooltip="تغيير كلمة المرور"><mat-icon>lock_open</mat-icon></button>
+  <button mat-icon-button matTooltip="ملء الشاشة" (click)="toggleFullscreen()"><mat-icon>crop_square</mat-icon></button>
+  <button mat-icon-button matTooltip="تسجيل الخروج"><mat-icon>logout</mat-icon></button>
 </mat-toolbar>
 
 <main class="content">

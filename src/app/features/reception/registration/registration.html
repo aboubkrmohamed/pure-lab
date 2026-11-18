@@ -1,0 +1,69 @@
+<!-- @switch (store.view()) {
+
+  @case ('main') {
+    <div class="row g-2 p-2">
+      <div class="col-12 col-xl-6">
+        <app-visit-bar />
+        <app-patient-form />
+      </div>
+      <div class="col-12 col-xl-6">
+        @if (store.showDoctors()) {
+          <app-doctors-list />
+        } @else {
+          <app-requests-panel />
+        }
+      </div>
+    </div>
+  }
+
+  @default {
+    <div class="text-center p-5">
+      <h3>{{ title() || store.view() }}</h3>
+      <p class="text-muted">الصفحة دي هتتبني في الخطوة الجاية</p>
+      <button class="btn btn-outline-secondary" (click)="store.go('main')">
+        <i class="fa-solid fa-arrow-right"></i> رجوع
+      </button>
+    </div>
+  }
+} -->
+
+
+@switch (store.view()) {
+
+  @case ('main') {
+    <div class="row g-2 p-2">
+      <div class="col-12 col-xl-6">
+        <app-visit-bar />
+        <app-patient-form />
+      </div>
+      <div class="col-12 col-xl-6">
+        @if (store.showDoctors()) {
+          <app-doctors-list />
+        } @else {
+          <app-requests-panel />
+        }
+      </div>
+    </div>
+  }
+
+  @case ('tests') { <app-tests-view /> }
+  @case ('payments') { <app-payments-view /> }
+  @case ('price-plans') { <app-price-plans-view /> }
+  @case ('samples') { <app-samples-view /> }
+  @case ('notes') { <app-notes-view /> }
+  @case ('services') { <app-services-view /> }
+  @case ('questions') { <app-questions-view /> }
+  @case ('attachments') { <app-attachments-view /> }
+  @case ('user-summary') { <app-user-summary-view /> }
+  @case ('payments-report') { <app-payments-report-view /> }
+  @case ('settings') { <app-settings-view /> }
+  @default {
+    <div class="text-center p-5">
+      <h3>{{ title() || store.view() }}</h3>
+      <p class="text-muted">الصفحة دي هتتبني في الخطوة الجاية</p>
+      <button class="btn btn-outline-secondary" (click)="store.go('main')">
+        <i class="fa-solid fa-arrow-right"></i> رجوع
+      </button>
+    </div>
+  }
+}

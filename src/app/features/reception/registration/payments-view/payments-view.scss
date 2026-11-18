@@ -1,0 +1,10 @@
+.wrap { background: #fff; min-height: 85vh; display: flex; flex-direction: column; }
+.list { flex: 1; padding: 8px; }
+.entry {
+  display: flex; align-items: center; gap: 8px; padding: 14px 12px; margin-bottom: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
+  &.pay { background: #b2dfb0; }
+  &.disc { background: #f6a04d; }
+  .c { flex: 1; text-align: center; }
+  .del { background: none; border: 0; color: #5d4037; }
+}

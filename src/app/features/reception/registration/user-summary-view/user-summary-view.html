@@ -1,0 +1,11 @@
+<app-reg-header [title]="'ملخص اليوم - ' + store.currentUser" />
+
+@if (summary(); as s) {
+  <div class="row g-2 p-3" style="max-width: 800px; margin: auto">
+    <div class="col-6"><div class="p-3 text-white rounded" style="background:#2a85c8">زيارات<div class="fs-3">{{ s.visits }}</div></div></div>
+    <div class="col-6"><div class="p-3 text-white rounded" style="background:#0fa886">الإجمالي<div class="fs-3">{{ s.total | number: '1.2-2' }}</div></div></div>
+    <div class="col-6"><div class="p-3 text-white rounded" style="background:#54c157">المدفوع<div class="fs-3">{{ s.paid | number: '1.2-2' }}</div></div></div>
+    <div class="col-6"><div class="p-3 text-white rounded" style="background:#e8790c">الخصم<div class="fs-3">{{ s.discount | number: '1.2-2' }}</div></div></div>
+    <div class="col-12"><div class="p-3 text-white rounded" style="background:#e53345">المتبقي<div class="fs-3">{{ s.remaining | number: '1.2-2' }}</div></div></div>
+  </div>
+}

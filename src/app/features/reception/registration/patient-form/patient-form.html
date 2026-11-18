@@ -1,0 +1,149 @@
+<div appEnterNext (finished)="store.go('tests')" class="box">
+
+  <div [formGroup]="store.patientForm" class="row g-2">
+    <div class="col-12 col-md-6">
+      <div class="form-floating">
+        <input #nameEl id="fullName" class="form-control" formControlName="fullName" placeholder="الاسم" autocomplete="off" />
+        <label for="fullName">الاسم</label>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="form-floating">
+        <select id="gender" class="form-select" formControlName="gender">
+          @for (g of genders; track g) { <option [value]="g">{{ g }}</option> }
+        </select>
+        <label for="gender">النوع</label>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="form-floating">
+        <select id="title" class="form-select" formControlName="title">
+          <option value=""></option>
+          @for (t of titles; track t) { <option [value]="t">{{ t }}</option> }
+        </select>
+        <label for="title">اللقب</label>
+      </div>
+    </div>
+
+    <div class="col-4 col-md-2">
+      <div class="form-floating">
+        <input id="ageY" type="number" min="0" class="form-control" formControlName="ageYears" placeholder="عام" />
+        <label for="ageY">السن - عام</label>
+      </div>
+    </div>
+    <div class="col-4 col-md-2">
+      <div class="form-floating">
+        <input id="ageM" type="number" min="0" class="form-control" formControlName="ageMonths" placeholder="شهر" />
+        <label for="ageM">شهر</label>
+      </div>
+    </div>
+    <div class="col-4 col-md-2">
+      <div class="form-floating">
+        <input id="ageD" type="number" min="0" class="form-control" formControlName="ageDays" placeholder="يوم" />
+        <label for="ageD">يوم</label>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-floating">
+        <input id="birth" type="date" class="form-control" formControlName="birthDate" placeholder="تاريخ الميلاد" />
+        <label for="birth">تاريخ الميلاد</label>
+      </div>
+    </div>
+
+    <div class="col-6 col-md-3">
+      <div class="form-floating">
+        <input id="phone" type="tel" class="form-control" formControlName="phone" placeholder="تليفون" autocomplete="off" />
+        <label for="phone">تليفون</label>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="form-floating">
+        <select id="nat" class="form-select" formControlName="nationality">
+          <option value=""></option>
+          @for (n of nationalities; track n) { <option [value]="n">{{ n }}</option> }
+        </select>
+        <label for="nat">الجنسية</label>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="form-floating">
+        <input id="nid" class="form-control" formControlName="nationalId" placeholder="رقم وطني" autocomplete="off" />
+        <label for="nid">رقم وطني</label>
+      </div>
+    </div>
+    <div class="col-6 col-md-3">
+      <div class="form-floating">
+        <input id="pass" class="form-control" formControlName="passport" placeholder="جواز" autocomplete="off" />
+        <label for="pass">جواز</label>
+      </div>
+    </div>
+    <div class="col-12">
+      <div class="form-floating">
+        <input id="addr" class="form-control" formControlName="address" placeholder="العنوان" autocomplete="off" />
+        <label for="addr">العنوان</label>
+      </div>
+    </div>
+  </div>
+
+  <hr class="my-2" />
+
+  <div [formGroup]="store.referralForm" class="row g-2">
+    <div class="col-4 col-md-3">
+      <div class="form-floating">
+        <input id="refNo" type="number" class="form-control" formControlName="doctorId" placeholder="رقم الإحالة"
+               (keydown.enter)="onRefNo($event)" />
+        <label for="refNo">رقم الإحالة</label>
+      </div>
+    </div>
+    <div class="col-8 col-md-3">
+      <div class="form-floating">
+        <input #refTitleEl id="refTitle" class="form-control" formControlName="title" placeholder="لقب الإحالة"
+               autocomplete="off" (keydown.enter)="onRefTitle($event)" />
+        <label for="refTitle">لقب الإحالة</label>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-floating">
+        <input id="refName" class="form-control" formControlName="name" placeholder="الإحالة" autocomplete="off" />
+        <label for="refName">الإحالة</label>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <div class="form-floating">
+        <input id="plan" class="form-control pointer" formControlName="priceListName" placeholder="خطة الأسعار"
+               readonly (click)="store.go('price-plans')" />
+        <label for="plan">خطة الأسعار</label>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="form-floating">
+        <input id="cat" class="form-control pointer" formControlName="priceCategory" placeholder="الفئة"
+               readonly (click)="store.go('price-plans')" />
+        <label for="cat">الفئة</label>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-4">
+      <div class="form-floating">
+        <input id="contr" class="form-control" formControlName="contracted" placeholder="متعاقد" autocomplete="off" />
+        <label for="contr">متعاقد</label>
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="form-floating">
+        <select id="rel" class="form-select" formControlName="relation">
+          <option value=""></option>
+          @for (r of relations; track r) { <option [value]="r">{{ r }}</option> }
+        </select>
+        <label for="rel">قرابة</label>
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="form-floating">
+        <input id="card" class="form-control" formControlName="treatmentCardNo" placeholder="رقم بطاقة العلاج" autocomplete="off" />
+        <label for="card">رقم بطاقة العلاج</label>
+      </div>
+    </div>
+  </div>
+</div>

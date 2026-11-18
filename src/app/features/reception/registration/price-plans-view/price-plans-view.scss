@@ -1,0 +1,10 @@
+.side { background: #e6e6e6; min-height: 70vh; padding: 12px; }
+.items { background: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, .15); }
+.item {
+  display: flex; align-items: center; gap: 14px; width: 100%; padding: 14px 16px;
+  border: 0; border-bottom: 1px solid #eee; background: #fff; text-align: start; font-weight: 600;
+  i { color: #777; }
+  &:hover { background: #f3f8fd; }
+  &.sel { background: #a9c8f5; }
+}
+.foot { background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .15); }

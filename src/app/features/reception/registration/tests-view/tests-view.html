@@ -1,0 +1,119 @@
+<div class="row g-2 p-2">
+
+  <!-- اليمين: المريض + التحاليل المطلوبة -->
+  <div class="col-12 col-lg-6">
+    <div class="box">
+      <div class="who d-flex align-items-center gap-2 p-2">
+        <button class="btn btn-light" title="رجوع" (click)="store.go('main')">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <h5 class="m-0 flex-grow-1 text-center fw-bold">{{ patientName }}</h5>
+      </div>
+
+      @if (store.locked()) {
+        <div class="alert alert-warning m-2 py-1 small">الزيارة محفوظة، دوس على القلم عشان تعدّل التحاليل</div>
+      }
+
+      <div class="flex-grow-1 overflow-auto">
+        @for (t of store.tests(); track t.id) {
+          <div class="req d-flex align-items-center gap-2">
+            <span class="flex-grow-1 fw-bold">{{ t.name }}</span>
+            <span class="text-primary fw-bold">{{ t.price | number: '1.2-2' }}</span>
+            <button class="btn btn-sm text-danger" [disabled]="store.locked()" (click)="store.removeTest(t.id)">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+        } @empty {
+          <div class="text-center text-muted p-5">لسه ماختارتش تحاليل</div>
+        }
+      </div>
+
+      <app-totals-bar />
+    </div>
+  </div>
+
+  <!-- الشمال: البحث والباكجات -->
+  <div class="col-12 col-lg-6">
+    <div class="box">
+
+      <div class="d-flex align-items-center gap-2 p-2">
+        <button class="rbtn teal" title="الرئيسية" (click)="store.go('main')"><i class="fa-solid fa-house"></i></button>
+
+        @if (mode() === 'tests') {
+          <div class="form-floating flex-grow-1">
+            <input #searchEl id="search" class="form-control" placeholder="Search panels" autocomplete="off"
+                   [ngModel]="query()" (ngModelChange)="onSearch($event)" (keydown.enter)="onEnter()" />
+            <label for="search">Search panels</label>
+          </div>
+          <button class="rbtn indigo" title="الباكجات" (click)="setMode('packages')">
+            <i class="fa-solid fa-list-check"></i>
+          </button>
+        } @else {
+          <div class="form-floating flex-grow-1">
+            <input id="pk" class="form-control" placeholder=" " value="TEST PACKAGE MODE" disabled />
+            <label for="pk">Chose package</label>
+          </div>
+          <button class="rbtn red" title="رجوع للتحاليل" (click)="setMode('tests')">
+            <i class="fa-solid fa-list-ul"></i>
+          </button>
+        }
+      </div>
+
+      @if (mode() === 'tests') {
+        <div class="list">
+          @for (t of rows(); track t.id) {
+            <button type="button" class="trow" [class.added]="addedIds().has(t.id)"
+                    [class.focus]="focused()?.id === t.id" (click)="pick(t)">
+              <span class="code">{{ t.code }}</span>
+              <span class="name">{{ t.name }}</span>
+              <span class="price">{{ t.price | number: '1.2-2' }}</span>
+            </button>
+          } @empty {
+            <div class="text-center text-muted p-4">مفيش نتائج</div>
+          }
+        </div>
+
+        <div class="px-2 pt-2 flex-grow-1">
+          <div class="d-flex gap-3 border-bottom mb-2">
+            <button class="tabbtn" [class.on]="tab() === 'info'" (click)="tab.set('info')">INFO</button>
+            <button class="tabbtn" [class.on]="tab() === 'questions'" (click)="tab.set('questions')">QUESTIONS</button>
+            <button class="tabbtn" [class.on]="tab() === 'samples'" (click)="tab.set('samples')">SAMPLES</button>
+          </div>
+
+          @switch (tab()) {
+            @case ('info') {
+              @if (focused(); as f) {
+                <div class="small">
+                  <div><b>الكود:</b> {{ f.code }}</div>
+                  <div><b>القسم:</b> {{ f.department }}</div>
+                  <div><b>السعر:</b> {{ f.price | number: '1.2-2' }}</div>
+                </div>
+              } @else {
+                <p class="text-muted small">دوس على تحليل عشان تشوف بياناته</p>
+              }
+            }
+            @case ('questions') { <p class="text-muted small">لا توجد أسئلة لهذا التحليل</p> }
+            @case ('samples') {
+              @if (focused(); as f) { <div class="small"><b>نوع العينة:</b> {{ f.sampleType }}</div> }
+              @else { <p class="text-muted small">دوس على تحليل عشان تشوف العينة</p> }
+            }
+          }
+        </div>
+
+        <div class="pg p-2">
+          <app-pager [page]="page()" [pages]="pages()" (pageChange)="page.set($event)" />
+        </div>
+      } @else {
+        <div class="list">
+          @for (p of packages(); track p.id; let i = $index) {
+            <button type="button" class="trow" (click)="openPackage(p)">
+              <span class="code">{{ i + 1 }}</span>
+              <span class="name">{{ p.name }}</span>
+              <i class="fa-solid fa-paperclip px-3 text-secondary"></i>
+            </button>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="row g-2 p-2">
+
+  <!-- اليمين: الفئات بتاعة الخطة المختارة -->
+  <div class="col-12 col-lg-7">
+    <div class="side">
+      <button class="btn btn-light mb-2" (click)="store.go('main')">
+        <i class="fa-solid fa-arrow-right"></i> رجوع
+      </button>
+      @if (selected(); as s) {
+        <div class="items">
+          @for (c of s.categories; track c) {
+            <button type="button" class="item" (click)="choose(c)">
+              <i class="fa-solid fa-paperclip"></i><span>{{ c }}</span>
+            </button>
+          }
+        </div>
+      } @else {
+        <p class="text-muted text-center mt-5">اختار خطة أسعار من القايمة</p>
+      }
+    </div>
+  </div>
+
+  <!-- الشمال: الخطط -->
+  <div class="col-12 col-lg-5">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <i class="fa-solid fa-magnifying-glass text-primary"></i>
+      <input class="form-control" placeholder="بحث" autocomplete="off"
+             [ngModel]="query()" (ngModelChange)="onSearch($event)" />
+    </div>
+
+    <div class="items">
+      @for (p of plans(); track p.id) {
+        <button type="button" class="item" [class.sel]="selected()?.id === p.id" (click)="selected.set(p)">
+          <i class="fa-solid fa-paperclip"></i><span>{{ p.name }}</span>
+        </button>
+      } @empty {
+        <div class="p-4 text-center text-muted bg-white">مفيش نتائج</div>
+      }
+    </div>
+
+    <div class="foot d-flex align-items-center justify-content-between mt-2 px-2 py-1">
+      <button class="btn btn-sm" [disabled]="page() === 0" (click)="go(page() - 1)"><i class="fa-solid fa-chevron-right"></i></button>
+      <span>{{ page() + 1 }} / {{ pages() }} Pages</span>
+      <button class="btn btn-sm" [disabled]="page() >= pages() - 1" (click)="go(page() + 1)"><i class="fa-solid fa-chevron-left"></i></button>
+    </div>
+  </div>
+</div>

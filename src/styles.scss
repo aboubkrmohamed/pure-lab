@@ -44,3 +44,16 @@ html, body {
   font-family: 'Cairo', sans-serif;
   background: #f1f3f6;
 }
+.rbtn {
+  width: 44px; height: 44px; flex-shrink: 0; border: 0; border-radius: 50%;
+  color: #fff; font-size: 18px; box-shadow: 0 2px 4px rgba(0, 0, 0, .3);
+  &:hover:not(:disabled) { filter: brightness(1.1); }
+  &:disabled { opacity: .45; }
+  &.teal { background: #1faa87; }
+  &.red { background: #e53935; }
+  &.green { background: #43b049; }
+  &.indigo { background: #3f51b5; }
+}
+@media print {
+  .topbar, .no-print, .rbtn { display: none !important; }
+}

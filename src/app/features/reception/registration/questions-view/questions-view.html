@@ -1,0 +1,19 @@
+<app-reg-header title="الأسئلة" />
+
+<div class="p-3" style="max-width: 700px; margin: auto">
+  @for (q of questions(); track q.id) {
+    <div class="mb-3">
+      <label class="form-label fw-bold" [for]="'q' + q.id">{{ q.text }}</label>
+      @if (q.type === 'yesno') {
+        <select class="form-select" [id]="'q' + q.id" [value]="store.answers()[q.id] ?? ''"
+                (change)="store.setAnswer(q.id, $any($event.target).value)">
+          <option value=""></option><option value="نعم">نعم</option><option value="لا">لا</option>
+        </select>
+      } @else {
+        <input class="form-control" [id]="'q' + q.id" autocomplete="off" [value]="store.answers()[q.id] ?? ''"
+               (input)="store.setAnswer(q.id, $any($event.target).value)" />
+      }
+    </div>
+  }
+  <p class="small text-muted">الإجابات بتتحفظ مع الزيارة (Ctrl+S).</p>
+</div>

@@ -1,0 +1,65 @@
+<app-reg-header title="إعدادات التسجيل" />
+
+<div class="p-3 settings" dir="ltr">
+
+  <div class="d-flex align-items-center gap-2 pb-2 border-bottom border-dark mb-3">
+    <h2 class="h4 fw-bold m-0 me-2">Reg Settings</h2>
+    <button class="up" title="رفع إعدادات" (click)="soon('رفع الإعدادات')"><i class="fa-solid fa-cloud-arrow-up"></i></button>
+    <button class="up" title="رفع إعدادات" (click)="soon('رفع الإعدادات')"><i class="fa-solid fa-cloud-arrow-up"></i></button>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-12 col-lg-4">
+      <label class="lbl" for="bp">Barcode Printer</label>
+      <input id="bp" class="form-control" [value]="s.data().barcodePrinter" (input)="setText('barcodePrinter', $event)" />
+    </div>
+    <div class="col-12 col-lg-3">
+      <label class="lbl" for="rp">Receipt Printer</label>
+      <input id="rp" class="form-control" [value]="s.data().receiptPrinter" (input)="setText('receiptPrinter', $event)" />
+    </div>
+    <div class="col-6 col-lg-2">
+      <label class="lbl" for="ls">Label Size</label>
+      <select id="ls" class="form-select" [value]="s.data().labelSize" (change)="setSize($event)">
+        @for (z of sizes; track z) { <option [value]="z" [selected]="z === s.data().labelSize">{{ z }}</option> }
+      </select>
+    </div>
+    <div class="col-6 col-lg-3">
+      <label class="lbl" for="dr">Default referral title</label>
+      <input id="dr" class="form-control" [value]="s.data().defaultReferralTitle" (input)="setText('defaultReferralTitle', $event)" />
+    </div>
+
+    <div class="col-6 col-lg-3">
+      <label class="lbl" for="tm">Label Top Margin</label>
+      <input id="tm" type="number" class="form-control" [value]="s.data().labelTopMargin" (input)="setNum('labelTopMargin', $event)" />
+    </div>
+    <div class="col-6 col-lg-3">
+      <label class="lbl" for="lm">Label Left Margin</label>
+      <input id="lm" type="number" class="form-control" [value]="s.data().labelLeftMargin" (input)="setNum('labelLeftMargin', $event)" />
+    </div>
+    <div class="col-6 col-lg-3">
+      <label class="lbl" for="ip">Print Service IP</label>
+      <input id="ip" class="form-control" [value]="s.data().printServiceIp" (input)="setText('printServiceIp', $event)" />
+    </div>
+    <div class="col-6 col-lg-3">
+      <label class="lbl" for="af">Auto file labels</label>
+      <input id="af" class="form-control" [value]="s.data().autoFileLabels" (input)="setText('autoFileLabels', $event)" />
+    </div>
+
+    @for (t of toggles; track t.key) {
+      <div class="col-12 col-md-6 col-lg-3">
+        <div class="tg form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" [id]="t.key"
+                 [checked]="s.data()[t.key]" (change)="setBool(t.key, $event)" />
+          <label class="form-check-label" [for]="t.key">{{ t.label }}</label>
+        </div>
+      </div>
+    }
+  </div>
+
+  <div class="d-flex flex-wrap gap-2 mt-4">
+    <button class="act" (click)="soon('Printing server')"><i class="fa-solid fa-download"></i> PRINTING SERVER</button>
+    <button class="act" (click)="soon('Fonts')"><i class="fa-solid fa-download"></i> FONTS</button>
+    <button class="act" (click)="soon('Print dummy label')"><i class="fa-solid fa-barcode"></i> PRINT DUMMY LABEL</button>
+    <button class="act" (click)="refreshLists()"><i class="fa-solid fa-rotate"></i> REFRESH LISTS</button>
+  </div>
+</div>

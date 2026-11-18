@@ -1,0 +1,55 @@
+<div class="panel shadow-sm">
+
+  <div class="head d-flex align-items-center gap-1 px-2">
+    <button class="ib" title="باركود" (click)="soon('طباعة الباركود')"><i class="fa-solid fa-barcode"></i></button>
+    <button class="ib" title="طباعة الإيصال" (click)="soon('طباعة الإيصال')"><i class="fa-solid fa-receipt"></i></button>
+@if (settings.data().sampleList) {
+  <button class="ib" title="العينات" (click)="store.go('samples')"><i class="fa-solid fa-flask"></i></button>
+}    <button class="ib" title="Job order" (click)="soon('Job order')"><i class="fa-solid fa-id-badge"></i></button>
+
+    <select class="filter flex-grow-1" [ngModel]="filter()" (ngModelChange)="filter.set($event)">
+      <option value="ALL">ALL PERMITTED</option>
+      @for (d of departments(); track d) { <option [value]="d">{{ d }}</option> }
+    </select>
+
+    <button class="ib" title="المدفوعات (F3)" (click)="store.go('payments')"><i class="fa-solid fa-hashtag"></i></button>
+    <button class="ib" title="اختيار التحاليل" (click)="store.go('tests')"><i class="fa-solid fa-list-check"></i></button>
+    <button class="ib" title="مشاركة" (click)="soon('مشاركة')"><i class="fa-solid fa-share-nodes"></i></button>
+    <button class="ib" [matMenuTriggerFor]="menu"><i class="fa-solid fa-chevron-down"></i></button>
+
+    <mat-menu #menu="matMenu">
+      @for (m of menuItems; track m.label) {
+        <button mat-menu-item [disabled]="m.needsSaved && !store.isSaved()" (click)="open(m)">
+          <i class="fa-solid {{ m.icon }} me-2"></i>{{ m.label }}
+        </button>
+      }
+    </mat-menu>
+  </div>
+
+  <div class="body">
+    @for (t of rows(); track t.id) {
+      <div class="row-t d-flex align-items-center gap-2 px-2">
+        <i class="fa-regular fa-circle status"></i>
+        <span class="flex-grow-1 fw-bold">{{ t.name }}</span>
+        <span class="price"><i class="fa-solid fa-user"></i> {{ t.price | number: '1.2-2' }}</span>
+        <button class="rm" title="حذف" [disabled]="store.locked()" (click)="store.removeTest(t.id)">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    } @empty {
+      <div class="text-center text-muted p-5">لسه مفيش تحاليل (دوس Enter في آخر خانة)</div>
+    }
+  </div>
+
+  <div class="foot d-flex align-items-center gap-2 px-2 py-1">
+    <span class="chip">{{ store.currentUser }}</span>
+    <select class="prio" [ngModel]="store.priority()" (ngModelChange)="store.priority.set($event)">
+      <option>Routine</option><option>Urgent</option><option>STAT</option>
+    </select>
+    <app-pager class="mx-auto" [page]="curPage()" [pages]="pages()" (pageChange)="page.set($event)" />
+  </div>
+
+
+
+  <app-totals-bar />
+</div>
